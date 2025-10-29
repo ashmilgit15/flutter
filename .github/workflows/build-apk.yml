@@ -1,4 +1,5 @@
 name: Build APK
+# Updated to use GitHub Actions v4 - October 2025
 
 on:
   push:
