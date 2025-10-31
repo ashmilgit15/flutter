@@ -24,7 +24,8 @@ class StorageService {
   static Box<Habit> get habitsBox => Hive.box<Habit>(_habitsBoxName);
 
   /// Get profile box
-  static Box<UserProfile> get profileBox => Hive.box<UserProfile>(_profileBoxName);
+  static Box<UserProfile> get profileBox =>
+      Hive.box<UserProfile>(_profileBoxName);
 
   /// Get or create user profile
   static UserProfile getOrCreateProfile() {

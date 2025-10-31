@@ -38,18 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.park),
-            label: 'Garden',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Habits',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.store),
-            label: 'Shop',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.park), label: 'Garden'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Habits'),
+          BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Shop'),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
@@ -101,9 +92,7 @@ class GardenView extends StatelessWidget {
                         children: [
                           Text(
                             'My Garden',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
+                            style: Theme.of(context).textTheme.headlineSmall
                                 ?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: AppTheme.textDark,
@@ -112,12 +101,8 @@ class GardenView extends StatelessWidget {
                           const SizedBox(height: 4),
                           Text(
                             _getGreeting(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  color: AppTheme.textLight,
-                                ),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(color: AppTheme.textLight),
                           ),
                         ],
                       ),
@@ -171,20 +156,12 @@ class GardenView extends StatelessWidget {
                         '${provider.completedToday.length}/${habits.length}',
                         'Today',
                       ),
-                      Container(
-                        width: 1,
-                        height: 30,
-                        color: Colors.grey[300],
-                      ),
+                      Container(width: 1, height: 30, color: Colors.grey[300]),
                       _buildStatColumn(
                         '${provider.activeHabits.length}',
                         'Active',
                       ),
-                      Container(
-                        width: 1,
-                        height: 30,
-                        color: Colors.grey[300],
-                      ),
+                      Container(width: 1, height: 30, color: Colors.grey[300]),
                       _buildStatColumn(
                         '${profile.totalHabitsCompleted}',
                         'Total',
@@ -203,11 +180,11 @@ class GardenView extends StatelessWidget {
                           padding: const EdgeInsets.all(16),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.8,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                          ),
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.8,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 16,
+                              ),
                           itemCount: habits.length,
                           itemBuilder: (context, index) {
                             final habit = habits[index];
@@ -243,10 +220,7 @@ class GardenView extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppTheme.textLight,
-          ),
+          style: const TextStyle(fontSize: 12, color: AppTheme.textLight),
         ),
       ],
     );
@@ -266,17 +240,15 @@ class GardenView extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Add your first habit to start growing',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppTheme.textLight,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppTheme.textLight),
           ),
           const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const AddHabitScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const AddHabitScreen()),
               );
             },
             icon: const Icon(Icons.add),
@@ -311,8 +283,8 @@ class GardenView extends StatelessWidget {
                   Text(
                     habit.plantName,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -328,11 +300,7 @@ class GardenView extends StatelessWidget {
                         '${habit.currentStreak}',
                         'Streak',
                       ),
-                      _buildDetailItem(
-                        '🏆',
-                        '${habit.longestStreak}',
-                        'Best',
-                      ),
+                      _buildDetailItem('🏆', '${habit.longestStreak}', 'Best'),
                       _buildDetailItem(
                         '✅',
                         '${habit.totalCompletions}',
@@ -357,15 +325,16 @@ class GardenView extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () async {
-                          final success =
-                              await provider.revivePlant(habit.id);
+                          final success = await provider.revivePlant(habit.id);
                           if (context.mounted) {
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(success
-                                    ? 'Plant revived! 🌱'
-                                    : 'Not enough sunlight ☀️'),
+                                content: Text(
+                                  success
+                                      ? 'Plant revived! 🌱'
+                                      : 'Not enough sunlight ☀️',
+                                ),
                               ),
                             );
                           }
@@ -389,17 +358,11 @@ class GardenView extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppTheme.textLight,
-          ),
+          style: const TextStyle(fontSize: 12, color: AppTheme.textLight),
         ),
       ],
     );
@@ -428,8 +391,8 @@ class HabitsListView extends StatelessWidget {
                   child: Text(
                     'My Habits',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -438,8 +401,7 @@ class HabitsListView extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('📝',
-                                  style: TextStyle(fontSize: 80)),
+                              const Text('📝', style: TextStyle(fontSize: 80)),
                               const SizedBox(height: 16),
                               Text(
                                 'No habits yet',
@@ -476,12 +438,14 @@ class HabitsListView extends StatelessWidget {
           habit.isWilted
               ? '🥀'
               : habit.isCompletedToday
-                  ? '✅'
-                  : '⭕',
+              ? '✅'
+              : '⭕',
           style: const TextStyle(fontSize: 32),
         ),
         title: Text(habit.name),
-        subtitle: Text('${habit.plantName} • ${habit.currentStreak} day streak'),
+        subtitle: Text(
+          '${habit.plantName} • ${habit.currentStreak} day streak',
+        ),
         trailing: IconButton(
           icon: const Icon(Icons.more_vert),
           onPressed: () {

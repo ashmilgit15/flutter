@@ -25,8 +25,8 @@ class SettingsScreen extends StatelessWidget {
                 Text(
                   'Settings',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 24),
 
@@ -51,15 +51,26 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       _buildStatRow('Total Habits', '${stats['totalHabits']}'),
-                      _buildStatRow('Active Habits', '${stats['activeHabits']}'),
                       _buildStatRow(
-                          'Completed Today', '${stats['completedToday']}'),
-                      _buildStatRow('Total Completions',
-                          '${stats['totalCompletions']}'),
+                        'Active Habits',
+                        '${stats['activeHabits']}',
+                      ),
                       _buildStatRow(
-                          'Longest Streak', '${stats['longestStreak']} days'),
+                        'Completed Today',
+                        '${stats['completedToday']}',
+                      ),
                       _buildStatRow(
-                          'Current Sunlight', '${stats['currentSunlight']} ☀️'),
+                        'Total Completions',
+                        '${stats['totalCompletions']}',
+                      ),
+                      _buildStatRow(
+                        'Longest Streak',
+                        '${stats['longestStreak']} days',
+                      ),
+                      _buildStatRow(
+                        'Current Sunlight',
+                        '${stats['currentSunlight']} ☀️',
+                      ),
                     ],
                   ),
                 ),
@@ -217,11 +228,7 @@ class SettingsScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 14),
                       ),
                       const SizedBox(height: 16),
-                      const Row(
-                        children: [
-                          Text('Made with 💚 and Flutter'),
-                        ],
-                      ),
+                      const Row(children: [Text('Made with 💚 and Flutter')]),
                     ],
                   ),
                 ),
@@ -259,16 +266,8 @@ class SettingsScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: const TextStyle(color: AppTheme.textLight),
-          ),
-          Text(
-            value,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          Text(label, style: const TextStyle(color: AppTheme.textLight)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
         ],
       ),
     );
@@ -300,10 +299,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text(
-                emoji,
-                style: const TextStyle(fontSize: 28),
-              ),
+              child: Text(emoji, style: const TextStyle(fontSize: 28)),
             ),
           ),
           const SizedBox(height: 6),

@@ -31,7 +31,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     _plantNameController = TextEditingController(
       text: widget.habit?.plantName ?? 'My Plant',
     );
-    
+
     if (widget.habit != null) {
       _selectedPlantType = widget.habit!.plantType;
       if (widget.habit!.reminderTime != null) {
@@ -56,7 +56,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
       context: context,
       initialTime: _reminderTime ?? TimeOfDay.now(),
     );
-    
+
     if (time != null) {
       setState(() {
         _reminderTime = time;
@@ -72,7 +72,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   Future<void> _saveHabit() async {
     if (_formKey.currentState!.validate()) {
       final provider = Provider.of<HabitProvider>(context, listen: false);
-      
+
       if (isEditing) {
         // Update existing habit
         final habit = widget.habit!;
@@ -80,7 +80,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
         habit.plantName = _plantNameController.text;
         habit.plantType = _selectedPlantType;
         habit.reminderTime = _formatReminderTime();
-        
+
         await provider.updateHabit(habit);
       } else {
         // Create new habit
@@ -91,7 +91,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
           reminderTime: _formatReminderTime(),
         );
       }
-      
+
       if (mounted) {
         Navigator.of(context).pop();
       }
@@ -101,15 +101,15 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(isEditing ? 'Edit Habit' : 'New Habit'),
-      ),
+      appBar: AppBar(title: Text(isEditing ? 'Edit Habit' : 'New Habit')),
       body: Consumer<HabitProvider>(
         builder: (context, provider, child) {
           final unlockedPlants = PlantCatalog.allPlants
-              .where((plant) =>
-                  plant.isStarter ||
-                  provider.profile.isPlantUnlocked(plant.id))
+              .where(
+                (plant) =>
+                    plant.isStarter ||
+                    provider.profile.isPlantUnlocked(plant.id),
+              )
               .toList();
 
           return SingleChildScrollView(
@@ -123,8 +123,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   Text(
                     'Habit Name',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
@@ -147,15 +147,15 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   Text(
                     'Choose Your Plant',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Select a plant to represent this habit',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppTheme.textLight,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppTheme.textLight),
                   ),
                   const SizedBox(height: 16),
 
@@ -165,11 +165,11 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 1,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                    ),
+                          crossAxisCount: 3,
+                          childAspectRatio: 1,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                        ),
                     itemCount: unlockedPlants.length,
                     itemBuilder: (context, index) {
                       final plant = unlockedPlants[index];
@@ -220,8 +220,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   Text(
                     'Plant Name',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
@@ -244,15 +244,15 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   Text(
                     'Daily Reminder',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Get a gentle reminder at the same time each day',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppTheme.textLight,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppTheme.textLight),
                   ),
                   const SizedBox(height: 12),
                   InkWell(
@@ -302,7 +302,9 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                       onPressed: _saveHabit,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text(isEditing ? 'Save Changes' : 'Create Habit'),
+                        child: Text(
+                          isEditing ? 'Save Changes' : 'Create Habit',
+                        ),
                       ),
                     ),
                   ),

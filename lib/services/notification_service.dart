@@ -12,7 +12,9 @@ class NotificationService {
   static Future<void> initialize() async {
     tz.initializeTimeZones();
 
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
@@ -38,10 +40,14 @@ class NotificationService {
 
   /// Request notification permissions
   static Future<bool> requestPermissions() async {
-    final androidPlugin = _notifications.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>();
-    final iosPlugin = _notifications.resolvePlatformSpecificImplementation<
-        IOSFlutterLocalNotificationsPlugin>();
+    final androidPlugin = _notifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+    final iosPlugin = _notifications
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >();
 
     bool granted = true;
 
@@ -50,11 +56,13 @@ class NotificationService {
     }
 
     if (iosPlugin != null) {
-      granted = await iosPlugin.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      ) ?? false;
+      granted =
+          await iosPlugin.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          ) ??
+          false;
     }
 
     return granted;
@@ -63,7 +71,8 @@ class NotificationService {
   /// Schedule smart notification for a habit
   static Future<void> scheduleSmartNotification(Habit habit) async {
     // Determine best time to remind based on habit history
-    String? reminderTime = habit.reminderTime ?? habit.suggestedReminderTime ?? '09:00';
+    String? reminderTime =
+        habit.reminderTime ?? habit.suggestedReminderTime ?? '09:00';
 
     final timeParts = reminderTime.split(':');
     final hour = int.parse(timeParts[0]);

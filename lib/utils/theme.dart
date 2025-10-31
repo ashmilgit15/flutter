@@ -7,18 +7,18 @@ class AppTheme {
   static const Color primaryGreen = Color(0xFF8FBC8F);
   static const Color lightGreen = Color(0xFFB4D7B4);
   static const Color paleGreen = Color(0xFFE8F5E8);
-  
+
   static const Color beige = Color(0xFFF5F5DC);
   static const Color lightBeige = Color(0xFFFAF8F3);
   static const Color darkBeige = Color(0xFFD4C5B0);
-  
+
   static const Color accentPink = Color(0xFFFFB6C1);
   static const Color accentLavender = Color(0xFFE6E6FA);
   static const Color accentSky = Color(0xFFB0E0E6);
-  
+
   static const Color textDark = Color(0xFF4A4A4A);
   static const Color textLight = Color(0xFF8A8A8A);
-  
+
   static const Color successGreen = Color(0xFF90EE90);
   static const Color warningYellow = Color(0xFFFFE4B5);
   static const Color errorRed = Color(0xFFFFB6B9);
@@ -34,13 +34,13 @@ class AppTheme {
         error: errorRed,
       ),
       scaffoldBackgroundColor: lightBeige,
-      
+
       // Typography
       textTheme: GoogleFonts.comfortaaTextTheme().apply(
         bodyColor: textDark,
         displayColor: textDark,
       ),
-      
+
       // AppBar
       appBarTheme: AppBarTheme(
         backgroundColor: primaryGreen,
@@ -53,16 +53,14 @@ class AppTheme {
           color: Colors.white,
         ),
       ),
-      
+
       // Card
       cardTheme: CardThemeData(
         color: Colors.white,
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
-      
+
       // Elevated Button
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -79,7 +77,7 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Text Button
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -90,7 +88,7 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Input Decoration
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -107,20 +105,21 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: primaryGreen, width: 2),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
         hintStyle: TextStyle(color: textLight),
       ),
-      
+
       // FloatingActionButton
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: primaryGreen,
         foregroundColor: Colors.white,
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
-      
+
       // Bottom Navigation Bar
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Colors.white,
@@ -136,28 +135,28 @@ class AppTheme {
 
   /// Gradient backgrounds for different themes
   static LinearGradient get springGradient => const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [paleGreen, lightBeige],
-      );
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [paleGreen, lightBeige],
+  );
 
   static LinearGradient get summerGradient => const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [accentSky, paleGreen],
-      );
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [accentSky, paleGreen],
+  );
 
   static LinearGradient get autumnGradient => const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [warningYellow, lightBeige],
-      );
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [warningYellow, lightBeige],
+  );
 
   static LinearGradient get winterGradient => const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [accentLavender, lightBeige],
-      );
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [accentLavender, lightBeige],
+  );
 
   /// Get gradient by theme name
   static LinearGradient getGradient(String theme) {

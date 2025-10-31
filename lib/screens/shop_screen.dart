@@ -30,12 +30,8 @@ class ShopScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Shop',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                              style: Theme.of(context).textTheme.headlineSmall
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -48,8 +44,10 @@ class ShopScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  const Text('☀️',
-                                      style: TextStyle(fontSize: 20)),
+                                  const Text(
+                                    '☀️',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     '${provider.profile.sunlight}',
@@ -66,10 +64,8 @@ class ShopScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           'Unlock new plants and decorations',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppTheme.textLight,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: AppTheme.textLight),
                         ),
                       ],
                     ),
@@ -83,8 +79,8 @@ class ShopScreen extends StatelessWidget {
                     child: Text(
                       '🌱 Plants',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -94,46 +90,46 @@ class ShopScreen extends StatelessWidget {
                   sliver: SliverGrid(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.75,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                    ),
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final plant = PlantCatalog.unlockablePlants[index];
-                        final isUnlocked =
-                            provider.profile.isPlantUnlocked(plant.id);
-                        final canAfford =
-                            provider.profile.sunlight >= plant.unlockCost;
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.75,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                        ),
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final plant = PlantCatalog.unlockablePlants[index];
+                      final isUnlocked = provider.profile.isPlantUnlocked(
+                        plant.id,
+                      );
+                      final canAfford =
+                          provider.profile.sunlight >= plant.unlockCost;
 
-                        return _buildShopItem(
-                          context: context,
-                          emoji: plant.emoji,
-                          name: plant.name,
-                          description: plant.description,
-                          cost: plant.unlockCost,
-                          isUnlocked: isUnlocked,
-                          canAfford: canAfford,
-                          onUnlock: () async {
-                            final success = await provider.unlockPlant(
-                              plant.id,
-                              plant.unlockCost,
-                            );
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(success
+                      return _buildShopItem(
+                        context: context,
+                        emoji: plant.emoji,
+                        name: plant.name,
+                        description: plant.description,
+                        cost: plant.unlockCost,
+                        isUnlocked: isUnlocked,
+                        canAfford: canAfford,
+                        onUnlock: () async {
+                          final success = await provider.unlockPlant(
+                            plant.id,
+                            plant.unlockCost,
+                          );
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  success
                                       ? '${plant.name} unlocked! 🎉'
-                                      : 'Not enough sunlight ☀️'),
+                                      : 'Not enough sunlight ☀️',
                                 ),
-                              );
-                            }
-                          },
-                        );
-                      },
-                      childCount: PlantCatalog.unlockablePlants.length,
-                    ),
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    }, childCount: PlantCatalog.unlockablePlants.length),
                   ),
                 ),
 
@@ -144,8 +140,8 @@ class ShopScreen extends StatelessWidget {
                     child: Text(
                       '✨ Decorations',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -155,46 +151,46 @@ class ShopScreen extends StatelessWidget {
                   sliver: SliverGrid(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.75,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                    ),
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final deco = PlantCatalog.allDecorations[index];
-                        final isUnlocked =
-                            provider.profile.isDecorationUnlocked(deco.id);
-                        final canAfford =
-                            provider.profile.sunlight >= deco.unlockCost;
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.75,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                        ),
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final deco = PlantCatalog.allDecorations[index];
+                      final isUnlocked = provider.profile.isDecorationUnlocked(
+                        deco.id,
+                      );
+                      final canAfford =
+                          provider.profile.sunlight >= deco.unlockCost;
 
-                        return _buildShopItem(
-                          context: context,
-                          emoji: deco.emoji,
-                          name: deco.name,
-                          description: deco.description,
-                          cost: deco.unlockCost,
-                          isUnlocked: isUnlocked,
-                          canAfford: canAfford,
-                          onUnlock: () async {
-                            final success = await provider.unlockDecoration(
-                              deco.id,
-                              deco.unlockCost,
-                            );
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(success
+                      return _buildShopItem(
+                        context: context,
+                        emoji: deco.emoji,
+                        name: deco.name,
+                        description: deco.description,
+                        cost: deco.unlockCost,
+                        isUnlocked: isUnlocked,
+                        canAfford: canAfford,
+                        onUnlock: () async {
+                          final success = await provider.unlockDecoration(
+                            deco.id,
+                            deco.unlockCost,
+                          );
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  success
                                       ? '${deco.name} unlocked! 🎉'
-                                      : 'Not enough sunlight ☀️'),
+                                      : 'Not enough sunlight ☀️',
                                 ),
-                              );
-                            }
-                          },
-                        );
-                      },
-                      childCount: PlantCatalog.allDecorations.length,
-                    ),
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    }, childCount: PlantCatalog.allDecorations.length),
                   ),
                 ),
 
@@ -207,10 +203,10 @@ class ShopScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         Container(
                           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.9),
-            borderRadius: BorderRadius.circular(16),
-          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.9),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                           child: Column(
                             children: [
                               const Text(
@@ -224,12 +220,8 @@ class ShopScreen extends StatelessWidget {
                               Text(
                                 'Earn sunlight by completing habits daily!\nEach completion gives you 5 ☀️',
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      color: AppTheme.textLight,
-                                    ),
+                                style: Theme.of(context).textTheme.bodyMedium
+                                    ?.copyWith(color: AppTheme.textLight),
                               ),
                             ],
                           ),
@@ -239,9 +231,7 @@ class ShopScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 32),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 32)),
               ],
             ),
           ),
@@ -287,10 +277,7 @@ class ShopScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               name,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
               textAlign: TextAlign.center,
             ),
           ),
@@ -299,10 +286,7 @@ class ShopScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               description,
-              style: const TextStyle(
-                fontSize: 11,
-                color: AppTheme.textLight,
-              ),
+              style: const TextStyle(fontSize: 11, color: AppTheme.textLight),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -318,17 +302,17 @@ class ShopScreen extends StatelessWidget {
               ),
               child: const Text(
                 'Unlocked',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
             )
           else
             ElevatedButton(
               onPressed: canAfford ? onUnlock : null,
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 minimumSize: const Size(0, 0),
               ),
               child: Row(
@@ -336,10 +320,7 @@ class ShopScreen extends StatelessWidget {
                 children: [
                   const Text('☀️', style: TextStyle(fontSize: 14)),
                   const SizedBox(width: 4),
-                  Text(
-                    '$cost',
-                    style: const TextStyle(fontSize: 12),
-                  ),
+                  Text('$cost', style: const TextStyle(fontSize: 12)),
                 ],
               ),
             ),

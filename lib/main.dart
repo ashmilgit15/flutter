@@ -72,13 +72,15 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
 
-    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.5,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
 
     _controller.forward();
 
@@ -112,9 +114,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: AppTheme.springGradient,
-        ),
+        decoration: BoxDecoration(gradient: AppTheme.springGradient),
         child: Center(
           child: AnimatedBuilder(
             animation: _controller,
@@ -142,18 +142,13 @@ class _SplashScreenState extends State<SplashScreen>
                           ],
                         ),
                         child: const Center(
-                          child: Text(
-                            '🌱',
-                            style: TextStyle(fontSize: 60),
-                          ),
+                          child: Text('🌱', style: TextStyle(fontSize: 60)),
                         ),
                       ),
                       const SizedBox(height: 24),
                       Text(
                         'Habit Garden',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
+                        style: Theme.of(context).textTheme.headlineMedium
                             ?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: AppTheme.textDark,
@@ -163,8 +158,8 @@ class _SplashScreenState extends State<SplashScreen>
                       Text(
                         'Grow with every habit',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: AppTheme.textLight,
-                            ),
+                          color: AppTheme.textLight,
+                        ),
                       ),
                     ],
                   ),

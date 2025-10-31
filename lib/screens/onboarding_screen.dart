@@ -15,17 +15,17 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-  
+
   // Step 1: Habit inputs
   final List<TextEditingController> _habitControllers = [
     TextEditingController(),
     TextEditingController(),
     TextEditingController(),
   ];
-  
+
   // Step 2: Plant selections
   final List<String> _selectedPlants = ['fern', 'cactus', 'sunflower'];
-  
+
   // Step 3: Plant names
   final List<TextEditingController> _plantNameControllers = [
     TextEditingController(text: 'My Fern'),
@@ -65,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _completeOnboarding() async {
     final provider = Provider.of<HabitProvider>(context, listen: false);
-    
+
     // Create habits
     for (int i = 0; i < 3; i++) {
       if (_habitControllers[i].text.isNotEmpty) {
@@ -76,9 +76,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         );
       }
     }
-    
+
     await provider.completeOnboarding();
-    
+
     if (mounted) {
       Navigator.of(context).pushReplacementNamed('/home');
     }
@@ -88,9 +88,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: AppTheme.springGradient,
-        ),
+        decoration: BoxDecoration(gradient: AppTheme.springGradient),
         child: SafeArea(
           child: Column(
             children: [
@@ -115,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
               ),
-              
+
               // Content
               Expanded(
                 child: PageView(
@@ -133,7 +131,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ],
                 ),
               ),
-              
+
               // Navigation buttons
               Padding(
                 padding: const EdgeInsets.all(24),
@@ -147,7 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       )
                     else
                       const SizedBox(width: 80),
-                    
+
                     ElevatedButton(
                       onPressed: _currentPage == 3
                           ? _completeOnboarding
@@ -170,10 +168,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            '🌱',
-            style: TextStyle(fontSize: 100),
-          ),
+          const Text('🌱', style: TextStyle(fontSize: 100)),
           const SizedBox(height: 32),
           Text(
             'Welcome to\nHabit Garden',
@@ -187,9 +182,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Text(
             'Grow beautiful plants by\nmaintaining daily habits',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: AppTheme.textLight,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: AppTheme.textLight),
           ),
           const SizedBox(height: 48),
           Container(
@@ -218,10 +213,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       children: [
         Text(emoji, style: const TextStyle(fontSize: 24)),
         const SizedBox(width: 12),
-        Text(
-          text,
-          style: const TextStyle(fontSize: 16),
-        ),
+        Text(text, style: const TextStyle(fontSize: 16)),
       ],
     );
   }
@@ -234,20 +226,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           Text(
             'Choose 3 Starter Habits',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           Text(
             'What daily habits do you want to build?',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppTheme.textLight,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppTheme.textLight),
           ),
           const SizedBox(height: 32),
-          
+
           _buildHabitInput(0, 'Drink 8 glasses of water'),
           const SizedBox(height: 16),
           _buildHabitInput(1, 'Read for 20 minutes'),
@@ -276,20 +268,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           Text(
             'Choose Your Plants',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           Text(
             'Each habit will grow a different plant',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppTheme.textLight,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppTheme.textLight),
           ),
           const SizedBox(height: 32),
-          
+
           for (int i = 0; i < 3; i++)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
@@ -330,9 +322,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppTheme.paleGreen
-                        : Colors.transparent,
+                    color: isSelected ? AppTheme.paleGreen : Colors.transparent,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected
@@ -343,10 +333,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   child: Column(
                     children: [
-                      Text(
-                        plant.emoji,
-                        style: const TextStyle(fontSize: 32),
-                      ),
+                      Text(plant.emoji, style: const TextStyle(fontSize: 32)),
                       const SizedBox(height: 4),
                       Text(
                         plant.name.split(' ').last,
@@ -371,20 +358,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           Text(
             'Name Your Plants',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           Text(
             'Give your plants personality! 🌱',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppTheme.textLight,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppTheme.textLight),
           ),
           const SizedBox(height: 32),
-          
+
           for (int i = 0; i < 3; i++)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
@@ -397,7 +384,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildPlantNameInput(int index) {
     final plantInfo = PlantCatalog.getPlantById(_selectedPlants[index]);
-    
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -406,10 +393,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       child: Row(
         children: [
-          Text(
-            plantInfo?.emoji ?? '🌱',
-            style: const TextStyle(fontSize: 40),
-          ),
+          Text(plantInfo?.emoji ?? '🌱', style: const TextStyle(fontSize: 40)),
           const SizedBox(width: 16),
           Expanded(
             child: TextField(

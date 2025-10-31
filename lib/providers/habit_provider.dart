@@ -17,8 +17,7 @@ class HabitProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   /// Get active (non-wilted) habits
-  List<Habit> get activeHabits =>
-      _habits.where((h) => !h.isWilted).toList();
+  List<Habit> get activeHabits => _habits.where((h) => !h.isWilted).toList();
 
   /// Get wilted habits
   List<Habit> get wiltedHabits => _habits.where((h) => h.isWilted).toList();
@@ -79,7 +78,7 @@ class HabitProvider extends ChangeNotifier {
   /// Update habit
   Future<void> updateHabit(Habit habit) async {
     await StorageService.updateHabit(habit);
-    
+
     final index = _habits.indexWhere((h) => h.id == habit.id);
     if (index != -1) {
       _habits[index] = habit;

@@ -62,8 +62,8 @@ class Habit extends HiveObject {
     this.totalCompletions = 0,
     this.reminderTime,
     List<int>? smartReminderTimes,
-  })  : completionHistory = completionHistory ?? [],
-        smartReminderTimes = smartReminderTimes ?? [];
+  }) : completionHistory = completionHistory ?? [],
+       smartReminderTimes = smartReminderTimes ?? [];
 
   /// Check if habit was completed today
   bool get isCompletedToday {
@@ -76,13 +76,16 @@ class Habit extends HiveObject {
 
   /// Check if habit should wilt (missed yesterday)
   bool get shouldWilt {
-    if (lastCompletedAt == null && createdAt.isBefore(DateTime.now().subtract(const Duration(days: 1)))) {
+    if (lastCompletedAt == null &&
+        createdAt.isBefore(DateTime.now().subtract(const Duration(days: 1)))) {
       return true;
     }
     if (lastCompletedAt == null) return false;
-    
+
     final yesterday = DateTime.now().subtract(const Duration(days: 1));
-    return lastCompletedAt!.isBefore(DateTime(yesterday.year, yesterday.month, yesterday.day));
+    return lastCompletedAt!.isBefore(
+      DateTime(yesterday.year, yesterday.month, yesterday.day),
+    );
   }
 
   /// Get growth percentage (0-100)
@@ -93,7 +96,7 @@ class Habit extends HiveObject {
   /// Complete habit for today
   void complete() {
     final now = DateTime.now();
-    
+
     // Check if already completed today
     if (isCompletedToday) return;
 
@@ -104,7 +107,8 @@ class Habit extends HiveObject {
 
     // Update streak
     final yesterday = now.subtract(const Duration(days: 1));
-    final lastWasYesterday = lastCompletedAt != null &&
+    final lastWasYesterday =
+        lastCompletedAt != null &&
         lastCompletedAt!.year == yesterday.year &&
         lastCompletedAt!.month == yesterday.month &&
         lastCompletedAt!.day == yesterday.day;
@@ -134,7 +138,7 @@ class Habit extends HiveObject {
     // Track smart reminder time (minutes from midnight)
     final minutesFromMidnight = now.hour * 60 + now.minute;
     smartReminderTimes.add(minutesFromMidnight);
-    
+
     // Keep only last 30 completion times for smart reminders
     if (smartReminderTimes.length > 30) {
       smartReminderTimes.removeAt(0);
@@ -154,7 +158,7 @@ class Habit extends HiveObject {
   String? get suggestedReminderTime {
     final avgTime = averageCompletionTime;
     if (avgTime == null) return null;
-    
+
     final hours = avgTime ~/ 60;
     final minutes = avgTime % 60;
     return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';

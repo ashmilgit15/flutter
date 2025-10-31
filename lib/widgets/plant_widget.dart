@@ -32,13 +32,15 @@ class _PlantWidgetState extends State<PlantWidget>
       vsync: this,
     );
 
-    _scaleAnimation = Tween<double>(begin: 0.95, end: 1.05).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.95,
+      end: 1.05,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
-    _rotationAnimation = Tween<double>(begin: -0.02, end: 0.02).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _rotationAnimation = Tween<double>(
+      begin: -0.02,
+      end: 0.02,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     _controller.repeat(reverse: true);
   }
@@ -52,11 +54,11 @@ class _PlantWidgetState extends State<PlantWidget>
   String _getPlantEmoji() {
     // Get base plant emoji based on type and growth stage
     final baseEmoji = _getBaseEmoji();
-    
+
     if (widget.habit.isWilted) {
       return '🥀'; // Wilted flower
     }
-    
+
     return baseEmoji;
   }
 
@@ -141,7 +143,7 @@ class _PlantWidgetState extends State<PlantWidget>
                       _getPlantEmoji(),
                       style: TextStyle(fontSize: widget.size),
                     ),
-                    
+
                     // Growth indicator
                     const SizedBox(height: 8),
                     Container(
@@ -164,7 +166,7 @@ class _PlantWidgetState extends State<PlantWidget>
                         ),
                       ),
                     ),
-                    
+
                     // Plant name
                     const SizedBox(height: 4),
                     Text(
@@ -178,9 +180,10 @@ class _PlantWidgetState extends State<PlantWidget>
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    
+
                     // Streak indicator
-                    if (widget.habit.currentStreak > 0 && !widget.habit.isWilted)
+                    if (widget.habit.currentStreak > 0 &&
+                        !widget.habit.isWilted)
                       Padding(
                         padding: const EdgeInsets.only(top: 4),
                         child: Container(

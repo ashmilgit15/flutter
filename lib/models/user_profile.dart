@@ -46,9 +46,9 @@ class UserProfile extends HiveObject {
     this.notificationsEnabled = true,
     this.totalHabitsCompleted = 0,
     this.consecutiveDaysActive = 0,
-  })  : unlockedPlants = unlockedPlants ?? ['fern', 'cactus', 'sunflower'],
-        unlockedDecorations = unlockedDecorations ?? [],
-        createdAt = createdAt ?? DateTime.now();
+  }) : unlockedPlants = unlockedPlants ?? ['fern', 'cactus', 'sunflower'],
+       unlockedDecorations = unlockedDecorations ?? [],
+       createdAt = createdAt ?? DateTime.now();
 
   /// Award sunlight for completing a habit
   void earnSunlight(int amount) {

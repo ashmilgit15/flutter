@@ -31,13 +31,10 @@ class HabitCard extends StatelessWidget {
           child: Row(
             children: [
               // Plant emoji
-              Text(
-                _getPlantEmoji(),
-                style: const TextStyle(fontSize: 40),
-              ),
-              
+              Text(_getPlantEmoji(), style: const TextStyle(fontSize: 40)),
+
               const SizedBox(width: 16),
-              
+
               // Habit info
               Expanded(
                 child: Column(
@@ -60,7 +57,7 @@ class HabitCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    
+
                     // Progress bar
                     ClipRRect(
                       borderRadius: BorderRadius.circular(4),
@@ -75,9 +72,9 @@ class HabitCard extends StatelessWidget {
                         minHeight: 6,
                       ),
                     ),
-                    
+
                     const SizedBox(height: 8),
-                    
+
                     // Stats row
                     Row(
                       children: [
@@ -96,9 +93,9 @@ class HabitCard extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               const SizedBox(width: 16),
-              
+
               // Completion button or checkmark
               if (isCompleted)
                 const Icon(
@@ -109,13 +106,10 @@ class HabitCard extends StatelessWidget {
               else
                 IconButton(
                   onPressed: onComplete,
-                  icon: const Icon(
-                    Icons.circle_outlined,
-                    size: 40,
-                  ),
+                  icon: const Icon(Icons.circle_outlined, size: 40),
                   color: AppTheme.primaryGreen,
                 ),
-              
+
               // More options
               if (onEdit != null || onDelete != null)
                 PopupMenuButton<String>(
@@ -174,7 +168,7 @@ class HabitCard extends StatelessWidget {
 
   String _getPlantEmoji() {
     if (habit.isWilted) return '🥀';
-    
+
     switch (habit.plantType) {
       case 'fern':
         return '🌿';
