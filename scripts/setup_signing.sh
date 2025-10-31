@@ -1,86 +1,64 @@
 #!/bin/bash
-# Habit Garden - Setup Android Release Signing
-# This script helps you create a keystore for signing your Android APK
+# Setup Android Release Signing for Habit Garden
+# This script generates a keystore for release APK signing
 
-set -e
-
-echo "=========================================="
-echo "Habit Garden - Android Signing Setup"
-echo "=========================================="
+echo "=== Habit Garden - Release Signing Setup ==="
 echo ""
 
-KEYSTORE_PATH="android/keystore.jks"
-KEY_PROPERTIES="android/key.properties"
+# Configuration
+KEYSTORE_FILE="../android/keystore.jks"
+KEY_ALIAS="app_key"
+STORE_PASSWORD="habitgarden2024"
+KEY_PASSWORD="habitgarden2024"
+VALIDITY=10000
 
-# Check if keystore already exists
-if [ -f "$KEYSTORE_PATH" ]; then
-    echo "⚠️  Keystore already exists at $KEYSTORE_PATH"
-    read -p "Do you want to create a new one? This will overwrite the existing keystore. (y/N): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo "Aborted. Keeping existing keystore."
-        exit 0
-    fi
+# Find keytool
+if ! command -v keytool &> /dev/null; then
+    echo "ERROR: keytool not found!"
+    echo "Please install Java JDK and ensure keytool is in your PATH"
+    exit 1
 fi
 
-echo "Creating Android keystore..."
+echo "Found keytool: $(which keytool)"
 echo ""
-echo "You will be asked to provide:"
-echo "  - A keystore password (remember this!)"
-echo "  - A key password (can be the same as keystore password)"
-echo "  - Your name, organization, city, state, and country"
-echo ""
-echo "Press Enter to continue..."
-read
 
 # Generate keystore
+echo "Generating keystore..."
 keytool -genkey -v \
-    -keystore "$KEYSTORE_PATH" \
+    -keystore "$KEYSTORE_FILE" \
     -keyalg RSA \
     -keysize 2048 \
-    -validity 10000 \
-    -alias app_key
+    -validity $VALIDITY \
+    -alias "$KEY_ALIAS" \
+    -storepass "$STORE_PASSWORD" \
+    -keypass "$KEY_PASSWORD" \
+    -dname "CN=Habit Garden, OU=Development, O=Habit Garden, L=Unknown, ST=Unknown, C=US"
 
-if [ ! -f "$KEYSTORE_PATH" ]; then
-    echo "❌ Failed to create keystore!"
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to generate keystore"
     exit 1
 fi
 
 echo ""
-echo "✅ Keystore created successfully at $KEYSTORE_PATH"
-echo ""
+echo "Keystore created successfully!"
 
-# Create key.properties if it doesn't exist
-if [ ! -f "$KEY_PROPERTIES" ]; then
-    echo "Creating key.properties file..."
-    read -sp "Enter keystore password: " STORE_PASSWORD
-    echo ""
-    read -sp "Enter key password: " KEY_PASSWORD
-    echo ""
-    
-    cat > "$KEY_PROPERTIES" << EOF
+# Create key.properties file
+KEY_PROPERTIES_FILE="../android/key.properties"
+cat > "$KEY_PROPERTIES_FILE" << EOF
 storePassword=$STORE_PASSWORD
 keyPassword=$KEY_PASSWORD
-keyAlias=app_key
-storeFile=../keystore.jks
+keyAlias=$KEY_ALIAS
+storeFile=keystore.jks
 EOF
-    
-    echo "✅ Created $KEY_PROPERTIES"
-else
-    echo "⚠️  $KEY_PROPERTIES already exists. Please update it manually if needed."
-fi
 
+echo "Created key.properties file"
 echo ""
-echo "=========================================="
-echo "✅ Setup Complete!"
-echo "=========================================="
+echo "=== Setup Complete ==="
 echo ""
-echo "IMPORTANT: NEVER commit the following files to version control:"
-echo "  - $KEYSTORE_PATH"
-echo "  - $KEY_PROPERTIES"
+echo "IMPORTANT SECURITY NOTES:"
+echo "1. The keystore password is: $STORE_PASSWORD"
+echo "2. Keep this password safe and secure!"
+echo "3. DO NOT commit keystore.jks or key.properties to version control!"
+echo "4. Back up your keystore file - you cannot publish updates without it!"
 echo ""
-echo "These files are already in .gitignore"
-echo ""
-echo "You can now build a release APK with: ./scripts/build_apk.sh"
-echo ""
-
+echo "You can now build a release APK with: flutter build apk --release"

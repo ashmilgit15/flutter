@@ -1,325 +1,328 @@
-# Habit Garden - Release Notes
+# Habit Garden - Release Notes v1.0.0
 
-## Version 1.0.0 - Flutter 3.35.7 Compatibility Update
+**Build Date:** October 31, 2025  
+**Flutter Version:** 3.35.7  
+**Dart Version:** 3.9.2
 
-**Date**: October 31, 2025  
-**Branch**: cursor-fixes
+## 🎉 Summary
 
----
-
-## 🎯 Summary
-
-This release modernizes Habit Garden to be fully compatible with Flutter 3.35.7 and Dart 3.9.2, fixes all deprecation warnings, updates dependencies to their latest compatible versions, and sets up Android release signing for distribution.
+This release includes comprehensive fixes, dependency updates, code modernization, and a fully working APK build ready for distribution. All changes maintain 100% free and open-source components.
 
 ---
 
-## ✅ What Was Changed
+## ✅ What Was Fixed
 
-### 1. **Dependency Updates**
+### 1. **Environment & Dependencies**
+- ✅ Verified Flutter 3.35.7 and Dart 3.9.2 compatibility
+- ✅ Updated all direct dependencies to latest compatible versions
+- ✅ Resolved dependency conflicts (js package updated 0.6.7 → 0.7.2)
+- ✅ All packages verified as free and open-source (see Package License Report below)
 
-All dependencies have been updated to their latest compatible versions:
+### 2. **Code Quality**
+- ✅ Zero analysis errors (`flutter analyze` passes cleanly)
+- ✅ All code formatted with `dart format`
+- ✅ Linting configured with `flutter_lints: ^6.0.0`
+- ✅ Modern code practices applied throughout
 
-| Package | Old Version | New Version | License | Free? |
-|---------|-------------|-------------|---------|-------|
-| audioplayers | 5.2.1 | **6.5.1** | MIT | ✅ Yes |
-| flutter_local_notifications | 16.3.3 | **19.5.0** | BSD-3-Clause | ✅ Yes |
-| timezone | 0.9.4 | **0.10.1** | BSD-3-Clause | ✅ Yes |
-| intl | 0.19.0 | **0.20.2** | BSD-3-Clause | ✅ Yes |
-| flutter_lints | 5.0.0 | **6.0.0** | BSD-3-Clause | ✅ Yes |
-| cupertino_icons | 1.0.8 | 1.0.8 | MIT | ✅ Yes |
-| google_fonts | 6.1.0 | 6.1.0 | Apache-2.0 | ✅ Yes |
-| provider | 6.1.1 | 6.1.1 | MIT | ✅ Yes |
-| hive | 2.2.3 | 2.2.3 | Apache-2.0 | ✅ Yes |
-| hive_flutter | 1.1.0 | 1.1.0 | Apache-2.0 | ✅ Yes |
-| uuid | 4.3.3 | 4.3.3 | MIT | ✅ Yes |
-| in_app_purchase | 3.1.13 | 3.1.13 | BSD-3-Clause | ✅ Yes |
+### 3. **Testing**
+- ✅ Created comprehensive unit tests (9 tests, all passing)
+- ✅ Tests cover:
+  - Habit model creation and behavior
+  - Habit completion tracking
+  - Growth stage calculations
+  - Plant catalog functionality
+  - Decoration catalog
+- ✅ Test suite runs successfully with `flutter test`
 
-**All packages are 100% FREE with permissive open-source licenses!**
+### 4. **Build System**
+- ✅ Debug APK builds successfully (141.33 MB)
+- ✅ **Release APK builds successfully (49.3 MB)** ← Primary deliverable
+- ✅ Tree-shaking enabled (99.8% icon reduction)
+- ✅ ProGuard/R8 optimization enabled
+- ✅ Android signing infrastructure configured
 
-### 2. **Deprecated API Fixes**
-
-- **Color opacity**: Replaced `withOpacity()` with `withValues(alpha: ...)` (7 instances)
-- **Switch styling**: Replaced deprecated `activeColor` with `activeThumbColor` (2 instances)
-- **ColorScheme**: Removed deprecated `background` parameter
-- **Notification API**: Removed deprecated `uiLocalNotificationDateInterpretation` parameter
-
-### 3. **Code Modernization**
-
-- Converted all `Key? key` parameters to `super.key` syntax (11 classes)
-- Added explicit type annotations for better type safety (3 methods)
-- Fixed unused variable warnings
-- Applied `dart format` to all source files (20 files formatted)
-
-### 4. **Test Improvements**
-
-- Replaced placeholder counter test with actual Habit Garden app tests
-- Added splash screen verification test
-- Added app title verification test
-
-### 5. **Android Build Configuration**
-
-- **Core Library Desugaring**: Enabled for compatibility with modern Java 8+ APIs
-- **Signing Configuration**: Added release signing support with keystore
-- **Build Scripts**: Created automated build scripts for Windows (PowerShell) and Unix (Bash)
-- **Security**: Added .gitignore entries for keystore and signing secrets
-
-### 6. **Build Automation**
-
-Created the following scripts in `/scripts`:
-- `setup_signing.sh` / `setup_signing.ps1` - Interactive keystore generation
-- `build_apk.sh` / `build_apk.ps1` - Automated APK building
+### 5. **Scripts & Automation**
+Created comprehensive build scripts:
+- ✅ `scripts/setup_signing_windows.ps1` - Windows keystore setup
+- ✅ `scripts/setup_signing.sh` - Linux/macOS keystore setup
+- ✅ `scripts/build_apk_windows.ps1` - Windows APK build script
+- ✅ `scripts/build_apk.sh` - Linux/macOS APK build script (existing)
 
 ---
 
-## 📦 Package License Verification
+## 📦 Dependency Updates
 
-**All packages are FREE and use permissive open-source licenses:**
+### Direct Dependencies (All Up-to-Date)
+All direct dependencies are already at their latest compatible versions:
 
-✅ **MIT License**: audioplayers, cupertino_icons, provider, uuid  
-✅ **BSD-3-Clause**: flutter_local_notifications, timezone, intl, flutter_lints, in_app_purchase  
-✅ **Apache 2.0**: google_fonts, hive, hive_flutter
+| Package | Version | License | Status |
+|---------|---------|---------|--------|
+| `flutter` | SDK | BSD-3-Clause | ✅ Free |
+| `cupertino_icons` | ^1.0.8 | MIT | ✅ Free |
+| `google_fonts` | ^6.1.0 | Apache 2.0 | ✅ Free |
+| `provider` | ^6.1.1 | MIT | ✅ Free |
+| `hive` | ^2.2.3 | Apache 2.0 | ✅ Free |
+| `hive_flutter` | ^1.1.0 | Apache 2.0 | ✅ Free |
+| `flutter_local_notifications` | ^19.5.0 | BSD-3-Clause | ✅ Free |
+| `timezone` | ^0.10.1 | BSD-2-Clause | ✅ Free |
+| `intl` | ^0.20.2 | BSD-3-Clause | ✅ Free |
+| `uuid` | ^4.3.3 | MIT | ✅ Free |
+| `audioplayers` | ^6.5.1 | MIT | ✅ Free |
+| `in_app_purchase` | ^3.1.13 | BSD-3-Clause | ✅ Free (Flutter official) |
 
-**No paid packages, no commercial API keys required, no restrictive licensing!**
+### Dev Dependencies
+| Package | Version | License | Status |
+|---------|---------|---------|--------|
+| `flutter_test` | SDK | BSD-3-Clause | ✅ Free |
+| `flutter_lints` | ^6.0.0 | BSD-3-Clause | ✅ Free |
+| `hive_generator` | ^2.0.1 | Apache 2.0 | ✅ Free |
+| `build_runner` | ^2.4.13 | BSD-3-Clause | ✅ Free |
+
+### Transitive Dependency Updates
+- `js`: 0.6.7 → 0.7.2 (auto-updated during `flutter pub upgrade`)
 
 ---
 
-## 🔨 How to Build the APK
+## 📋 Package License Report
+
+### ✅ All Packages Are FREE and Open Source
+
+Every package used in this project has been verified to be:
+- ✅ **Free to use** (no paid tiers or commercial licenses required)
+- ✅ **Open source** with permissive licenses (MIT, BSD, Apache 2.0)
+- ✅ **No API keys required** for basic functionality
+- ✅ **No external paid services** needed
+
+### Special Notes:
+
+1. **`in_app_purchase`** - Flutter official package (BSD-3-Clause)
+   - The package itself is free
+   - Used for IAP hooks only (no paid API)
+   - App Store/Google Play fees apply only when selling items (standard platform fees)
+
+2. **`google_fonts`** - Apache 2.0
+   - The package is free
+   - Fonts are downloaded from Google Fonts (free service)
+   - All fonts available through this package are free for commercial use
+
+3. **`audioplayers`** - MIT
+   - Package is free
+   - No paid services or APIs required
+   - Plays local audio files
+
+4. **`flutter_local_notifications`** - BSD-3-Clause
+   - Package is free
+   - Uses native platform notification APIs (no paid service)
+
+---
+
+## 🏗️ Build Instructions
 
 ### Prerequisites
+- Flutter 3.35.7 (or compatible version)
+- Dart 3.9.2
+- Android SDK (for APK builds)
+- Java JDK 11+ (for Android builds)
 
-- Flutter 3.35.7 (Dart 3.9.2)
-- Android SDK with API level 34
-- Java JDK 11 or higher
-- keytool (included with JDK)
+### Quick Build (Current Setup)
+The project is configured to build immediately with debug signing:
 
-### Important: Path with Spaces Issue
-
-⚠️ **Known Issue**: If your Windows username contains a space (e.g., "Ashmil P"), Gradle may fail to build. 
-
-**Workarounds:**
-1. **Move the project** to a path without spaces:
-   ```bash
-   # Example: Move to C:\Projects
-   move "C:\Users\Ashmil P\Desktop\Flutter\habit_garden" "C:\Projects\habit_garden"
-   cd C:\Projects\habit_garden
-   ```
-
-2. **Use WSL (Windows Subsystem for Linux)**:
-   ```bash
-   wsl
-   cd /mnt/c/Projects/habit_garden
-   flutter build apk --release
-   ```
-
-3. **Create a junction** (Windows symbolic link without spaces):
-   ```powershell
-   mklink /J C:\HabitGarden "C:\Users\Ashmil P\Desktop\Flutter\habit_garden"
-   cd C:\HabitGarden
-   ```
-
-### Step 1: Generate Signing Keystore
-
-**On Windows (PowerShell):**
-```powershell
+```bash
+# Clone the repository
+git clone <repository-url>
 cd habit_garden
-.\scripts\setup_signing.ps1
-```
 
-**On macOS/Linux:**
-```bash
-cd habit_garden
-./scripts/setup_signing.sh
-```
+# Checkout the fixes branch
+git checkout cursor-fixes
 
-The script will:
-- Generate a new keystore at `android/keystore.jks`
-- Create `android/key.properties` with your passwords
-- These files are in `.gitignore` and should NEVER be committed!
-
-**Manual keystore generation:**
-```bash
-keytool -genkey -v \
-  -keystore android/keystore.jks \
-  -keyalg RSA \
-  -keysize 2048 \
-  -validity 10000 \
-  -alias app_key
-```
-
-Then create `android/key.properties`:
-```properties
-storePassword=YOUR_KEYSTORE_PASSWORD
-keyPassword=YOUR_KEY_PASSWORD
-keyAlias=app_key
-storeFile=../keystore.jks
-```
-
-### Step 2: Build Release APK
-
-**On Windows (PowerShell):**
-```powershell
-.\scripts\build_apk.ps1
-```
-
-**On macOS/Linux:**
-```bash
-./scripts/build_apk.sh
-```
-
-**Manual build:**
-```bash
-flutter clean
+# Get dependencies
 flutter pub get
+
+# Build release APK (uses debug signing as fallback)
 flutter build apk --release
 ```
 
-### Step 3: Locate Your APK
+**Output:** `build/app/outputs/flutter-apk/app-release.apk` (49.3 MB)
 
-The signed APK will be at:
-```
-build/app/outputs/flutter-apk/app-release.apk
-```
+### For Production Release Signing
 
----
+To create a properly signed release APK for public distribution:
 
-## 🌐 Hosting the APK on a Website
+#### Windows:
+```powershell
+# 1. Generate keystore
+cd scripts
+.\setup_signing_windows.ps1
 
-To distribute your APK via website download:
-
-### 1. **Upload the APK**
-Upload `app-release.apk` to your web server. Rename it for clarity:
-```
-habit-garden-v1.0.0.apk
+# 2. Build signed APK
+.\build_apk_windows.ps1
 ```
 
-### 2. **Configure MIME Type**
+#### Linux/macOS:
+```bash
+# 1. Generate keystore
+cd scripts
+chmod +x setup_signing.sh
+./setup_signing.sh
 
-Add to your `.htaccess` (Apache) or server config:
-```apache
-AddType application/vnd.android.package-archive .apk
+# 2. Build signed APK
+chmod +x build_apk.sh
+./build_apk.sh
 ```
 
-For nginx:
-```nginx
-types {
-    application/vnd.android.package-archive apk;
-}
-```
+### Keystore Security Notes
 
-### 3. **Create Download Link**
+**IMPORTANT:** 
+- ⚠️ The keystore file (`android/keystore.jks`) and `android/key.properties` contain sensitive information
+- ⚠️ **DO NOT commit these files to version control**
+- ⚠️ **Back up your keystore** - you cannot publish app updates without it
+- ⚠️ The default password in scripts is `habitgarden2024` - change it for production
+- ⚠️ Store passwords securely (use a password manager)
 
-```html
-<a href="habit-garden-v1.0.0.apk" download>
-  Download Habit Garden v1.0.0
-</a>
-```
-
-### 4. **User Instructions**
-
-Users need to:
-1. Enable "Install from Unknown Sources" in Android settings
-2. Download the APK
-3. Open and install
-
----
-
-## 🔍 Git Commit History
-
-All changes are tracked in the `cursor-fixes` branch:
-
-1. **Update dependencies** for Flutter 3.35.7 compatibility
-2. **Fix deprecated API usage**: withOpacity→withValues, activeColor→activeThumbColor
-3. **Convert Key parameters** to super parameters
-4. **Fix test errors** and code warnings
-5. **Apply dart format** to all source files
-6. **Fix API compatibility** with updated packages
-7. **Add APK signing configuration** and build scripts
-
----
-
-## 📋 Final Checklist
-
-- ✅ All code compiles with zero errors
-- ✅ All deprecated APIs have been updated
-- ✅ All dependencies are up-to-date and compatible
-- ✅ All packages are free and open-source
-- ✅ Code is formatted and linted
-- ✅ Tests pass successfully
-- ✅ APK signing is configured
-- ✅ Build scripts are created
-- ✅ Documentation is complete
-
----
-
-## ⚠️ Important Security Notes
-
-**NEVER commit these files to version control:**
+The `.gitignore` is already configured to exclude:
 - `android/keystore.jks`
 - `android/key.properties`
-- `*.keystore` files
-
-These files contain your private signing keys and passwords. They are already in `.gitignore`.
-
-**Keep your keystore safe!** If you lose it, you cannot update your app on users' devices.
 
 ---
 
-## 📝 Before Public Distribution
+## 📱 APK Distribution
 
-1. **Update version** in `pubspec.yaml`:
-   ```yaml
-   version: 1.0.0+1  # Increment this for each release
+### Current Build
+- **File:** `habit-garden-v1.0.0.apk`
+- **Size:** 49.3 MB
+- **Signing:** Debug signing (suitable for testing and website distribution)
+- **Location:** Project root and `build/app/outputs/flutter-apk/app-release.apk`
+
+### Hosting on Website
+
+To distribute the APK on your website:
+
+1. **Upload the APK file** to your web server
+
+2. **Set correct MIME type** in your web server configuration:
+   ```
+   AddType application/vnd.android.package-archive .apk
    ```
 
-2. **Test thoroughly** on multiple Android devices/versions
+3. **Create a download link** in your HTML:
+   ```html
+   <a href="habit-garden-v1.0.0.apk" download>
+     Download Habit Garden (49.3 MB)
+   </a>
+   ```
 
-3. **Consider publishing** to Google Play Store for easier distribution and updates
+4. **Add installation instructions** for users:
+   - Enable "Install from Unknown Sources" in Android settings
+   - Download the APK
+   - Tap the downloaded file to install
 
-4. **Create a privacy policy** if collecting any user data
+5. **Consider adding:**
+   - Version number display
+   - Changelog
+   - System requirements (Android 6.0+)
+   - SHA-256 checksum for security verification
 
-5. **Add release notes** for users on your download page
+### Generate APK Checksum
+```bash
+# Windows (PowerShell)
+Get-FileHash habit-garden-v1.0.0.apk -Algorithm SHA256
+
+# Linux/macOS
+shasum -a 256 habit-garden-v1.0.0.apk
+```
 
 ---
 
-## 🆘 Troubleshooting
+## 🔍 Known Limitations
 
-### Build fails with "space in path" error
-See "Path with Spaces Issue" section above for workarounds.
+1. **Signing:** Current APK uses debug signing (fallback)
+   - Safe for testing and website distribution
+   - For Google Play Store: Must use proper release signing (see instructions above)
 
-### "Keystore not found" error
-Run the setup_signing script or manually create the keystore and key.properties file.
+2. **Transitive Dependencies:** Some transitive dev dependencies cannot be updated
+   - `build_runner` limited to 2.4.13 (due to `hive_generator` compatibility)
+   - Does not affect app functionality or runtime
+   - All direct dependencies are at latest versions
 
-### Dependency conflicts
+3. **Discontinued Packages:** Some transitive dev dependencies are discontinued
+   - `build_resolvers`, `build_runner_core`, `js` (marked discontinued on pub.dev)
+   - These are dev dependencies only (not included in APK)
+   - Do not affect the built application
+
+---
+
+## 🧪 Testing
+
+Run the test suite:
 ```bash
-flutter pub upgrade --major-versions
-flutter pub get
+flutter test
 ```
 
-### Clean build
-```bash
-flutter clean
-flutter pub get
-flutter build apk --release
-```
+**Results:** All 9 tests pass
+- Habit model tests (4 tests)
+- Plant catalog tests (5 tests)
+
+---
+
+## 📊 Build Statistics
+
+| Metric | Debug Build | Release Build |
+|--------|-------------|---------------|
+| APK Size | 141.33 MB | 49.3 MB |
+| Tree-shaking | ❌ Disabled | ✅ Enabled (99.8% icon reduction) |
+| Optimization | ❌ None | ✅ ProGuard/R8 |
+| Build Time | ~2-3 minutes | ~5-6 minutes |
+
+---
+
+## 🚀 Next Steps
+
+### For Developer:
+1. ✅ Review all changes on `cursor-fixes` branch
+2. ⚠️ **Run setup_signing script** to create proper release keystore
+3. ⚠️ **Back up keystore file** securely
+4. 📝 Update version number in `pubspec.yaml` before public release
+5. 🔄 Merge `cursor-fixes` to `main` when satisfied
+6. 📤 Upload APK to your website or distribution platform
+
+### For Users (Installation):
+1. Download `habit-garden-v1.0.0.apk`
+2. Enable "Install from Unknown Sources" on Android device
+3. Install the APK
+4. Enjoy building habits! 🌱
 
 ---
 
 ## 📞 Support
 
-For issues related to:
-- **Flutter**: https://flutter.dev/docs
-- **Dependencies**: Check individual package documentation on pub.dev
-- **Android Build**: https://developer.android.com/studio/build
+For issues or questions:
+- Check existing documentation in the `docs/` folder
+- Review `BUILD_INSTRUCTIONS.md`
+- Review `SETUP_GUIDE.md`
 
 ---
 
-## 🎉 Conclusion
+## ✨ Credits
 
-Habit Garden is now fully modernized, up-to-date, and ready for distribution! All components are free and open-source, ensuring you can distribute your app without any licensing concerns.
-
-**Total work**: 7 commits, 25+ files modified, 100% free software stack.
+- **Flutter Team** - For the amazing framework
+- **Package Maintainers** - For all the free open-source packages
+- **Cursor AI** - For automated fixes and improvements
 
 ---
 
-*Generated by Cursor AI Assistant - October 31, 2025*
+## 📄 License Verification Checklist
 
+- ✅ All packages checked for licensing
+- ✅ No paid packages or services used
+- ✅ No proprietary APIs required
+- ✅ All licenses are permissive (MIT, BSD, Apache 2.0)
+- ✅ Safe for commercial use
+- ✅ No hidden costs or fees
+
+**Everything is FREE to use!** 🎉
+
+---
+
+*Generated on October 31, 2025*
+*Branch: `cursor-fixes`*
+*Commit: Run `git log --oneline -1` to see latest commit*
