@@ -9,7 +9,7 @@ import 'shop_screen.dart';
 
 /// Main home screen showing the garden view
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 /// Garden view showing all plants
 class GardenView extends StatelessWidget {
-  const GardenView({Key? key}) : super(key: key);
+  const GardenView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -408,7 +408,7 @@ class GardenView extends StatelessWidget {
 
 /// List view of habits
 class HabitsListView extends StatelessWidget {
-  const HabitsListView({Key? key}) : super(key: key);
+  const HabitsListView({super.key});
 
   @override
   Widget build(BuildContext context) {

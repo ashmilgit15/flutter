@@ -10,12 +10,12 @@ class HabitCard extends StatelessWidget {
   final VoidCallback? onDelete;
 
   const HabitCard({
-    Key? key,
+    super.key,
     required this.habit,
     required this.onComplete,
     this.onEdit,
     this.onDelete,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ import '../utils/theme.dart';
 class AddHabitScreen extends StatefulWidget {
   final Habit? habit;
 
-  const AddHabitScreen({Key? key, this.habit}) : super(key: key);
+  const AddHabitScreen({super.key, this.habit});
 
   @override
   State<AddHabitScreen> createState() => _AddHabitScreenState();

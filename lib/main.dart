@@ -29,7 +29,7 @@ void main() async {
 }
 
 class HabitGardenApp extends StatelessWidget {
-  const HabitGardenApp({Key? key}) : super(key: key);
+  const HabitGardenApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class HabitGardenApp extends StatelessWidget {
 
 /// Splash screen with loading and routing logic
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

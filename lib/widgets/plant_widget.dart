@@ -8,11 +8,11 @@ class PlantWidget extends StatefulWidget {
   final VoidCallback? onTap;
 
   const PlantWidget({
-    Key? key,
+    super.key,
     required this.habit,
     this.size = 100,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<PlantWidget> createState() => _PlantWidgetState();

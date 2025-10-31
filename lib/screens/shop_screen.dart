@@ -6,7 +6,7 @@ import '../utils/theme.dart';
 
 /// Shop screen for unlocking plants and decorations
 class ShopScreen extends StatelessWidget {
-  const ShopScreen({Key? key}) : super(key: key);
+  const ShopScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
