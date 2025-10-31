@@ -63,12 +63,7 @@ class NotificationService {
   /// Schedule smart notification for a habit
   static Future<void> scheduleSmartNotification(Habit habit) async {
     // Determine best time to remind based on habit history
-    String? reminderTime = habit.reminderTime ?? habit.suggestedReminderTime;
-
-    if (reminderTime == null) {
-      // Default to 9 AM if no history
-      reminderTime = '09:00';
-    }
+    String? reminderTime = habit.reminderTime ?? habit.suggestedReminderTime ?? '09:00';
 
     final timeParts = reminderTime.split(':');
     final hour = int.parse(timeParts[0]);

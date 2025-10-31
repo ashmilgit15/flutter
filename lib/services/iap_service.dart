@@ -73,17 +73,17 @@ class IAPService {
   /// Handle completed purchase
   static void _handlePurchase(PurchaseDetails purchase) {
     // Award sunlight based on product
-    int sunlightAmount = 0;
-
+    // Note: This is a placeholder for IAP integration
+    // The actual awarding would be handled by the app provider
     switch (purchase.productID) {
       case sunlightSmall:
-        sunlightAmount = 50;
+        // Award 50 sunlight
         break;
       case sunlightMedium:
-        sunlightAmount = 150;
+        // Award 150 sunlight
         break;
       case sunlightLarge:
-        sunlightAmount = 500;
+        // Award 500 sunlight
         break;
       case premiumPlanPack:
         // Unlock premium plants
