@@ -156,7 +156,7 @@ class SettingsScreen extends StatelessWidget {
                         onChanged: (value) {
                           provider.toggleSound();
                         },
-                        activeColor: AppTheme.primaryGreen,
+                        activeThumbColor: AppTheme.primaryGreen,
                         contentPadding: EdgeInsets.zero,
                       ),
                       const Divider(),
@@ -167,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
                         onChanged: (value) {
                           provider.toggleNotifications();
                         },
-                        activeColor: AppTheme.primaryGreen,
+                        activeThumbColor: AppTheme.primaryGreen,
                         contentPadding: EdgeInsets.zero,
                       ),
                     ],
@@ -243,7 +243,7 @@ class SettingsScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

@@ -31,7 +31,6 @@ class AppTheme {
         primary: primaryGreen,
         secondary: accentPink,
         surface: lightBeige,
-        background: paleGreen,
         error: errorRed,
       ),
       scaffoldBackgroundColor: lightBeige,
