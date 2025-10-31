@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/habit.dart';
 import '../providers/habit_provider.dart';
 import '../widgets/plant_widget.dart';
 import '../utils/theme.dart';
@@ -430,7 +431,8 @@ class HabitsListView extends StatelessWidget {
     );
   }
 
-  Widget _buildHabitListItem(context, habit, HabitProvider provider) {
+  Widget _buildHabitListItem(
+      BuildContext context, Habit habit, HabitProvider provider) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: ListTile(
@@ -461,7 +463,8 @@ class HabitsListView extends StatelessWidget {
     );
   }
 
-  void _showOptions(context, habit, HabitProvider provider) {
+  void _showOptions(
+      BuildContext context, Habit habit, HabitProvider provider) {
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -494,7 +497,8 @@ class HabitsListView extends StatelessWidget {
     );
   }
 
-  void _confirmDelete(context, habit, HabitProvider provider) {
+  void _confirmDelete(
+      BuildContext context, Habit habit, HabitProvider provider) {
     showDialog(
       context: context,
       builder: (context) {
