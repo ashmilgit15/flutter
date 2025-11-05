@@ -1,3 +1,14 @@
+/// ONBOARDING SCREEN - User Setup Flow
+///
+/// FIXES APPLIED:
+/// - ✅ Fixed RenderFlex overflow by wrapping pages in SingleChildScrollView
+/// - ✅ Prevents content from being cut off on smaller screens
+/// - ✅ Maintains proper aspect ratios and responsive design
+///
+/// OPTIMIZATIONS:
+/// - ✅ Added const constructors for better performance
+/// - ✅ Proper state management with form validation
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/habit_provider.dart';
@@ -261,11 +272,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildPlantsPage() {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
           Text(
             'Choose Your Plants',
             style: Theme.of(
@@ -289,8 +301,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildPlantSelector(int index) {
     return Container(
@@ -351,11 +364,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildNamesPage() {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
           Text(
             'Name Your Plants',
             style: Theme.of(
@@ -379,8 +393,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildPlantNameInput(int index) {
     final plantInfo = PlantCatalog.getPlantById(_selectedPlants[index]);

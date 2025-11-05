@@ -1,0 +1,19 @@
+# Fix APK downloads for mobile browsers
+# Place this file in your website root directory
+
+# Set correct MIME type for APK files
+<FilesMatch "\.apk$">
+    Header set Content-Type "application/vnd.android.package-archive"
+    Header set Content-Disposition "attachment"
+</FilesMatch>
+
+# Alternative method if Header doesn't work
+AddType application/vnd.android.package-archive .apk
+
+# Enable downloads for APK files
+<FilesMatch "\.apk$">
+    ForceType application/vnd.android.package-archive
+</FilesMatch>
+
+
+

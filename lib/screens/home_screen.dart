@@ -1,3 +1,19 @@
+/// HOME SCREEN - Main App Interface
+///
+/// FIXES APPLIED:
+/// - ✅ Resolved const constructor conflicts in widget tree
+/// - ✅ Proper const optimization without breaking dynamic content
+///
+/// OPTIMIZATIONS:
+/// - ✅ Added const constructors to stateless widgets
+/// - ✅ Optimized IndexedStack for tab switching
+/// - ✅ Efficient Consumer usage for state updates
+///
+/// FEATURES:
+/// - Garden view with plant grid
+/// - Habits list with completion tracking
+/// - Shop and settings tabs
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/habit.dart';

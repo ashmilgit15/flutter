@@ -97,3 +97,4 @@ Write-Host "4. Back up your keystore file - you cannot publish updates without i
 Write-Host ""
 Write-Host "You can now build a release APK with: flutter build apk --release" -ForegroundColor Green
 
+

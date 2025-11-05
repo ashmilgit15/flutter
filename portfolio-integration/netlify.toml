@@ -1,0 +1,11 @@
+# Netlify configuration for APK downloads
+# Place this file in your website root directory
+
+[[headers]]
+  for = "/*.apk"
+  [headers.values]
+    Content-Type = "application/vnd.android.package-archive"
+    Content-Disposition = "attachment"
+
+
+
