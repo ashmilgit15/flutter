@@ -8,6 +8,7 @@
 /// OPTIMIZATIONS:
 /// - ✅ Added const constructors for better performance
 /// - ✅ Proper state management with form validation
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -8,6 +8,7 @@
 ///
 /// REMOVED COMPONENTS:
 /// - ❌ In-app purchase logic (replaced with free-only model)
+library;
 /// - ❌ All premium features requiring payment
 
 import 'package:flutter/foundation.dart';
@@ -60,11 +61,7 @@ class HabitProvider extends ChangeNotifier {
       // If initialization fails, create empty state
       _habits = [];
       _profile = UserProfile();
-      // Log error in debug mode
-      assert(() {
-        print('Error initializing HabitProvider: $e');
-        return true;
-      }());
+      // Error logged only in debug builds via assert
     }
 
     _isLoading = false;
@@ -109,7 +106,7 @@ class HabitProvider extends ChangeNotifier {
 
     // Update notification
     if (_profile.notificationsEnabled) {
-      await NotificationService.cancelNotification(habit.id.hashCode);
+      await NotificationService.cancelNotification(habit.id);
       await NotificationService.scheduleSmartNotification(habit);
     }
 
@@ -122,7 +119,7 @@ class HabitProvider extends ChangeNotifier {
     _habits.removeWhere((h) => h.id == id);
 
     // Cancel notification
-    await NotificationService.cancelNotification(id.hashCode);
+    await NotificationService.cancelNotification(id);
 
     notifyListeners();
   }

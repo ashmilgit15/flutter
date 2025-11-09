@@ -1,0 +1,133 @@
+name: Android Release Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Create GitHub Release'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+        - 'true'
+        - 'false'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.35.7'
+        channel: 'stable'
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Get dependencies
+      run: flutter pub get
+
+    - name: Run tests
+      run: flutter test
+
+    - name: Build debug APK (always available)
+      run: flutter build apk --debug
+
+    - name: Upload debug APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: habit-garden-debug
+        path: build/app/outputs/flutter-apk/app-debug.apk
+        retention-days: 30
+
+    - name: Build release APK (unsigned - for manual signing)
+      if: github.event_name != 'pull_request'
+      run: flutter build apk --release
+
+    - name: Upload unsigned release APK
+      if: github.event_name != 'pull_request'
+      uses: actions/upload-artifact@v4
+      with:
+        name: habit-garden-release-unsigned
+        path: build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 30
+
+    # Signed build (only if secrets are configured)
+    - name: Decode keystore
+      if: github.event_name != 'pull_request' && env.KEYSTORE_BASE64 != ''
+      run: |
+        mkdir -p android/app/keystore
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/keystore/upload-keystore.jks
+      env:
+        KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+
+    - name: Create key.properties
+      if: github.event_name != 'pull_request' && env.KEYSTORE_PASSWORD != ''
+      run: |
+        cat > android/key.properties << EOF
+        storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+        keyPassword=${{ secrets.KEY_PASSWORD }}
+        keyAlias=${{ secrets.KEY_ALIAS }}
+        storeFile=keystore/upload-keystore.jks
+        EOF
+      env:
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+
+    - name: Build signed release APK
+      if: github.event_name != 'pull_request' && env.KEYSTORE_PASSWORD != ''
+      run: flutter build apk --release
+      env:
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+
+    - name: Upload signed release APK
+      if: github.event_name != 'pull_request' && env.KEYSTORE_PASSWORD != ''
+      uses: actions/upload-artifact@v4
+      with:
+        name: habit-garden-release-signed
+        path: build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 30
+
+    # Create GitHub Release (optional)
+    - name: Create Release
+      if: github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true'
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Habit Garden v${{ github.run_number }}
+        body: |
+          ## What's New
+          - Automated release build
+          - See commit history for details
+
+          ## Downloads
+          - Download the APK from the assets below
+          - For installation instructions, see DEPLOYMENT.md
+        draft: false
+        prerelease: false
+
+    - name: Upload APK to Release
+      if: github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: build/app/outputs/flutter-apk/app-release.apk
+        asset_name: habit-garden.apk
+        asset_content_type: application/vnd.android.package-archive

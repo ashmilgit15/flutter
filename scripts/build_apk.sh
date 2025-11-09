@@ -1,55 +1,55 @@
 #!/bin/bash
-# Habit Garden - Build Release APK
-# This script builds a signed release APK for distribution
-
 set -e
 
-echo "=========================================="
-echo "Habit Garden - Build Release APK"
-echo "=========================================="
-echo ""
+echo "🏗️  Building Habit Garden APK..."
 
 # Check if keystore exists
-if [ ! -f "android/keystore.jks" ] || [ ! -f "android/key.properties" ]; then
-    echo "⚠️  Release signing not set up!"
-    echo ""
-    echo "Please run ./scripts/setup_signing.sh first to create your keystore."
-    echo ""
-    echo "Building with debug signature instead..."
-    echo ""
-fi
-
-# Clean previous builds
-echo "🧹 Cleaning previous builds..."
-flutter clean
-
-# Get dependencies
-echo "📦 Getting dependencies..."
-flutter pub get
-
-# Build release APK
-echo "🔨 Building release APK..."
-flutter build apk --release
-
-# Check if build succeeded
-APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
-if [ -f "$APK_PATH" ]; then
-    APK_SIZE=$(du -h "$APK_PATH" | cut -f1)
-    echo ""
-    echo "=========================================="
-    echo "✅ Build Successful!"
-    echo "=========================================="
-    echo ""
-    echo "APK Location: $APK_PATH"
-    echo "APK Size: $APK_SIZE"
-    echo ""
-    echo "You can now distribute this APK file."
-    echo "To host on a website, serve with MIME type: application/vnd.android.package-archive"
-    echo ""
-else
-    echo ""
-    echo "❌ Build failed! APK not found at expected location."
-    echo ""
+if [ ! -f "android/app/keystore/upload-keystore.jks" ]; then
+    echo "❌ Keystore not found at android/app/keystore/upload-keystore.jks"
+    echo "   Run keystore generation first. See DEPLOYMENT.md for instructions."
     exit 1
 fi
 
+# Check if key.properties exists
+if [ ! -f "android/key.properties" ]; then
+    echo "❌ key.properties not found."
+    echo "   Create android/key.properties with signing configuration."
+    exit 1
+fi
+
+echo "🧹 Cleaning previous builds..."
+flutter clean
+
+echo "📦 Getting dependencies..."
+flutter pub get
+
+echo "🔨 Building release APK..."
+flutter build apk --release
+
+# Create releases directory
+mkdir -p releases
+
+# Get version from pubspec.yaml
+VERSION=$(grep 'version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
+OUTPUT_FILE="releases/habit-garden-v${VERSION}.apk"
+
+# Copy APK to releases folder
+cp build/app/outputs/flutter-apk/app-release.apk "$OUTPUT_FILE"
+
+echo "✅ APK built successfully!"
+echo "   📱 Output: $OUTPUT_FILE"
+echo "   📊 Size: $(du -h "$OUTPUT_FILE" | cut -f1)"
+
+# Verify APK if jarsigner is available
+if command -v jarsigner >/dev/null 2>&1; then
+    echo "🔐 Verifying APK signature..."
+    if jarsigner -verify -quiet "$OUTPUT_FILE" 2>/dev/null; then
+        echo "   ✅ APK signature verified"
+    else
+        echo "   ❌ APK signature verification failed"
+    fi
+fi
+
+echo ""
+echo "🚀 Ready for distribution!"
+echo "   See DEPLOYMENT.md for upload instructions."

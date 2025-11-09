@@ -8,6 +8,7 @@
 /// - ✅ Added const constructors to stateless widgets
 /// - ✅ Optimized IndexedStack for tab switching
 /// - ✅ Efficient Consumer usage for state updates
+library;
 ///
 /// FEATURES:
 /// - Garden view with plant grid
