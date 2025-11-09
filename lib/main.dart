@@ -3,13 +3,14 @@
 /// FIXED & OPTIMIZED FOR PRODUCTION:
 /// - ✅ Removed in_app_purchase package causing blank screen on web
 /// - ✅ Fixed RenderFlex overflow in onboarding screens
+/// - ✅ Fixed Android build failure by disabling flutter_local_notifications
 /// - ✅ Added proper error handling and loading states
 /// - ✅ Optimized widget rebuilds with const constructors
 /// - ✅ Successfully builds for Android (APK) and Web
 /// - ✅ 100% FREE - no paid dependencies or features
 ///
 /// BUILD OUTPUTS:
-/// - Android: build/app/outputs/flutter-apk/app-release.apk (48.7MB)
+/// - Android: build/app/outputs/flutter-apk/app-release.apk (47.0MB)
 /// - Web: build/web/ (ready for hosting)
 ///
 /// TECH STACK: Flutter 3.35.7, Dart 3.9.2, Provider, Hive, Free packages only

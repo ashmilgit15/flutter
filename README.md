@@ -213,13 +213,15 @@ flutter test --coverage
 **Version 1.0.0 - Production Release**
 - ✅ **Fixed blank screen crash** - Removed in_app_purchase causing LateInitializationError
 - ✅ **Resolved RenderFlex overflow** - Added scrollable containers to onboarding screens
+- ✅ **Fixed Android build failure** - Removed flutter_local_notifications causing bigLargeIcon(null) ambiguity
 - ✅ **Optimized performance** - Added const constructors and proper error handling
-- ✅ **Successful builds** - Android APK (48.7MB) and Web builds working
+- ✅ **Successful builds** - Android APK (47.0MB) and Web builds working
 - ✅ **100% FREE** - Removed all paid dependencies and features
 
 ## 🐛 Known Issues
 
 - Audio requires actual sound files (hooks are in place)
+- Notifications temporarily disabled due to flutter_local_notifications build issue
 - iOS requires Apple Developer account for distribution
 
 ## 📄 License
